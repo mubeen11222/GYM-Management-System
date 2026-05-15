@@ -1,0 +1,127 @@
+.root {
+    -fx-font-family: "MiddleWeather SemiBold", "MiddleWeather", "Segoe UI Semibold", "Segoe UI", Arial;
+    -fx-font-weight: 600;
+    -fx-background-color: #111318;
+}
+
+.label {
+    -fx-font-smoothing-type: gray;
+    -fx-font-family: "MiddleWeather SemiBold", "MiddleWeather", "Segoe UI Semibold", "Segoe UI", Arial;
+    -fx-font-weight: 600;
+}
+
+.button,
+.text-field,
+.password-field,
+.combo-box,
+.choice-box,
+.tab-label {
+    -fx-font-family: "MiddleWeather SemiBold", "MiddleWeather", "Segoe UI Semibold", "Segoe UI", Arial;
+    -fx-font-weight: 600;
+}
+
+.combo-box,
+.choice-box {
+    -fx-background-color: #232833;
+    -fx-background-radius: 10;
+    -fx-border-color: #2E3440;
+    -fx-border-radius: 10;
+    -fx-mark-color: #F8FAFC;
+}
+
+.combo-box .list-cell,
+.choice-box .label {
+    -fx-text-fill: #F8FAFC;
+    -fx-font-size: 13px;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: #1B1F27;
+    -fx-border-color: #2E3440;
+}
+
+.combo-box-popup .list-cell {
+    -fx-background-color: #1B1F27;
+    -fx-text-fill: #F8FAFC;
+    -fx-padding: 8 12;
+}
+
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: #2B313D;
+}
+
+.tab-pane {
+    -fx-tab-min-height: 42;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: #171A21;
+    -fx-border-color: transparent transparent #2E3440 transparent;
+}
+
+.tab {
+    -fx-background-color: transparent;
+    -fx-padding: 7 18;
+}
+
+.tab:selected {
+    -fx-background-color: #232833;
+    -fx-background-radius: 10 10 0 0;
+}
+
+.tab .tab-label {
+    -fx-text-fill: #A8B0BF;
+    -fx-font-weight: 800;
+}
+
+.tab:selected .tab-label {
+    -fx-text-fill: #F8FAFC;
+}
+
+.scroll-pane,
+.scroll-pane > .viewport {
+    -fx-background-color: #111318;
+}
+
+.scroll-bar:vertical,
+.scroll-bar:horizontal {
+    -fx-background-color: #111318;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #343C4C;
+    -fx-background-radius: 999;
+}
+
+.progress-bar > .track {
+    -fx-background-color: #232833;
+    -fx-background-radius: 999;
+}
+
+.progress-bar > .bar {
+    -fx-background-color: #E63946;
+    -fx-background-radius: 999;
+}
+
+.check-box {
+    -fx-text-fill: #F8FAFC;
+}
+
+.check-box .box {
+    -fx-background-color: #232833;
+    -fx-border-color: #3C4658;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.check-box:selected .box {
+    -fx-background-color: #2DD4BF;
+}
+
+.dialog-pane {
+    -fx-background-color: #1B1F27;
+}
+
+.dialog-pane .label {
+    -fx-text-fill: #F8FAFC;
+}
