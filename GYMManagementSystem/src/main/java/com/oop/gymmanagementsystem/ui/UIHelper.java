@@ -18,16 +18,16 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 public class UIHelper {
-    public static final String BG_DARK = "#111318";
-    public static final String BG_CARD = "#1B1F27";
-    public static final String BG_SIDEBAR = "#171A21";
-    public static final String BG_INPUT = "#232833";
+    public static final String BG_DARK = "#0A0A0A";
+    public static final String BG_CARD = "#141414";
+    public static final String BG_SIDEBAR = "#0E0E0E";
+    public static final String BG_INPUT = "#1A1A1A";
     public static final String PRIMARY = "#E63946";
     public static final String PRIMARY_HOVER = "#FF4D5B";
-    public static final String ACCENT = "#3A86FF";
+    public static final String ACCENT = "#CC2936";
     public static final String TEXT_PRIMARY = "#F8FAFC";
-    public static final String TEXT_SECONDARY = "#A8B0BF";
-    public static final String BORDER = "#2E3440";
+    public static final String TEXT_SECONDARY = "#9A9A9A";
+    public static final String BORDER = "#2A1015";
     public static final String SUCCESS = "#2DD4BF";
     public static final String WARNING = "#F59E0B";
     public static final String DANGER = "#FB7185";
@@ -244,12 +244,12 @@ public class UIHelper {
     }
 
     public static String cardStyle(String background, String border) {
-        return "-fx-background-color: " + background + ";" +
-                "-fx-background-radius: 14;" +
-                "-fx-border-color: " + border + ";" +
-                "-fx-border-radius: 14;" +
-                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.20), 22, 0.18, 0, 8);" +
-                "-fx-cursor: hand;";
+        return "-fx-background-color: " + background + ";"
+                + "-fx-background-radius: 14;"
+                + "-fx-border-color: " + border + ";"
+                + "-fx-border-radius: 14;"
+                + "-fx-effect: dropshadow(gaussian, rgba(230,57,70,0.12), 22, 0.18, 0, 8);"
+                + "-fx-cursor: hand;";
     }
 
     public static void showAlert(String title, String message, Alert.AlertType type) {

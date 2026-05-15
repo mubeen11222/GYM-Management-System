@@ -10,12 +10,15 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
@@ -55,7 +58,7 @@ public class MainApp extends Application {
 
         // Root container
         rootContainer = new StackPane();
-        rootContainer.setStyle("-fx-background-color: " + UIHelper.BG_DARK + ";");
+        rootContainer.setStyle("-fx-background-color: #0A0A0A;");
 
         scene = new Scene(rootContainer, 1100, 700);
         var stylesheet = getClass().getResource("/styles.css");
@@ -69,7 +72,7 @@ public class MainApp extends Application {
         // Start with login screen
         showLogin();
 
-        primaryStage.setTitle("AI GYM Management System");
+        primaryStage.setTitle("MMS GYM Management System");
         primaryStage.setScene(scene);
         primaryStage.setMinWidth(1040);
         primaryStage.setMinHeight(680);
@@ -152,7 +155,7 @@ public class MainApp extends Application {
     private void ensureShell(String activeSection) {
         if (appShell == null) {
             appShell = new BorderPane();
-            appShell.setStyle("-fx-background-color: #0D1016;");
+            appShell.setStyle("-fx-background-color: #0A0A0A;");
             rootContainer.getChildren().clear();
             rootContainer.getChildren().add(appShell);
         }
@@ -166,30 +169,40 @@ public class MainApp extends Application {
 
     private VBox createPersistentSidePanel(String activeSection) {
         VBox sidebar = new VBox(18);
-        sidebar.setPrefWidth(278);
-        sidebar.setMinWidth(278);
-        sidebar.setMaxWidth(278);
+        sidebar.setPrefWidth(320);
+        sidebar.setMinWidth(320);
+        sidebar.setMaxWidth(320);
         sidebar.setPadding(new Insets(26, 20, 22, 20));
         sidebar.setStyle(
-                "-fx-background-color: linear-gradient(to bottom, #151922, #10131A);" +
-                "-fx-border-color: transparent #242B38 transparent transparent;"
+                "-fx-background-color: linear-gradient(to bottom, #0E0E0E, #080808);" +
+                "-fx-border-color: transparent #1A0A0D transparent transparent;"
         );
 
-        HBox brand = new HBox(12);
+        HBox brand = new HBox(10);
         brand.setAlignment(Pos.CENTER_LEFT);
-        Label mark = new Label("AI");
-        mark.setAlignment(Pos.CENTER);
-        mark.setMinSize(48, 48);
-        mark.setStyle("-fx-background-color: linear-gradient(to bottom right, " + UIHelper.PRIMARY + ", #7D1D2A);"
-                + "-fx-background-radius: 16; -fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: 600;");
 
-        VBox brandText = new VBox(2);
-        Label name = new Label("AI GYM");
-        name.setStyle("-fx-text-fill: white; -fx-font-size: 22px; -fx-font-family: " + UIHelper.FONT + "; -fx-font-weight: 600;");
+        ImageView logoView = new ImageView();
+        try {
+            Image logoImg = new Image(getClass().getResourceAsStream("/mms_gym_logo.png"));
+            logoView.setImage(logoImg);
+            logoView.setFitWidth(130);
+            logoView.setFitHeight(130);
+            logoView.setPreserveRatio(true);
+            logoView.setSmooth(true);
+            Circle clip = new Circle(65, 65, 65);
+            logoView.setClip(clip);
+        } catch (Exception ex) {
+            System.err.println("Could not load logo: " + ex.getMessage());
+        }
+
+        VBox brandText = new VBox(0);
+        Label name = new Label("MMS GYM");
+        name.setMinWidth(Region.USE_PREF_SIZE);
+        name.setStyle("-fx-text-fill: #E63946; -fx-font-size: 26px; -fx-font-family: 'Anton', 'Impact', sans-serif; -fx-font-weight: 900; -fx-letter-spacing: -1;");
         Label sub = new Label("Management Suite");
-        sub.setStyle("-fx-text-fill: " + UIHelper.TEXT_SECONDARY + "; -fx-font-size: 12px; -fx-font-family: " + UIHelper.FONT + "; -fx-font-weight: 600;");
+        sub.setStyle("-fx-text-fill: #E63946; -fx-font-size: 11px; -fx-font-family: " + UIHelper.FONT + "; -fx-font-weight: 600;");
         brandText.getChildren().addAll(name, sub);
-        brand.getChildren().addAll(mark, brandText);
+        brand.getChildren().addAll(logoView, brandText);
 
         VBox nav = new VBox(8);
         nav.getChildren().addAll(
@@ -203,7 +216,7 @@ public class MainApp extends Application {
         DataStore ds = DataStore.getInstance();
         VBox snapshot = new VBox(10);
         snapshot.setPadding(new Insets(16));
-        snapshot.setStyle(shellPanelStyle("#191E28"));
+        snapshot.setStyle(shellPanelStyle("#111111"));
         snapshot.getChildren().addAll(
                 sideOverline("System Snapshot"),
                 UIHelper.createMetricRow("Members", String.valueOf(ds.getAllMembers().size())),
@@ -217,7 +230,7 @@ public class MainApp extends Application {
         User user = authService.getCurrentUser();
         VBox account = new VBox(10);
         account.setPadding(new Insets(16));
-        account.setStyle(shellPanelStyle("#191E28"));
+        account.setStyle(shellPanelStyle("#111111"));
         Label accountLabel = sideOverline("Signed In");
         Label userName = new Label(user != null ? user.getFullName() : "User");
         userName.setStyle("-fx-text-fill: white; -fx-font-size: 14px; -fx-font-family: " + UIHelper.FONT + "; -fx-font-weight: 600;");
@@ -248,13 +261,13 @@ public class MainApp extends Application {
     }
 
     private String navStyle(boolean active, boolean hover) {
-        String bg = active ? "linear-gradient(to right, #E63946, #9B2430)" : (hover ? "#222837" : "transparent");
-        String border = active ? "rgba(255,255,255,0.12)" : (hover ? "#30384A" : "transparent");
+        String bg = active ? "linear-gradient(to right, #E63946, #8B1A25)" : (hover ? "#1A1A1A" : "transparent");
+        String border = active ? "rgba(230,57,70,0.3)" : (hover ? "#2A1015" : "transparent");
         return "-fx-background-color: " + bg + ";"
                 + "-fx-background-radius: 14;"
                 + "-fx-border-color: " + border + ";"
                 + "-fx-border-radius: 14;"
-                + "-fx-text-fill: " + (active ? "white" : UIHelper.TEXT_SECONDARY) + ";"
+                + "-fx-text-fill: " + (active ? "white" : "#9A9A9A") + ";"
                 + "-fx-font-family: " + UIHelper.FONT + ";"
                 + "-fx-font-size: 14px;"
                 + "-fx-font-weight: 600;"
@@ -271,9 +284,9 @@ public class MainApp extends Application {
     private String shellPanelStyle(String color) {
         return "-fx-background-color: " + color + ";"
                 + "-fx-background-radius: 20;"
-                + "-fx-border-color: #273041;"
+                + "-fx-border-color: #2A1015;"
                 + "-fx-border-radius: 20;"
-                + "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.26), 28, 0.20, 0, 10);";
+                + "-fx-effect: dropshadow(gaussian, rgba(230,57,70,0.08), 28, 0.20, 0, 10);";
     }
 
     public static void main(String[] args) {

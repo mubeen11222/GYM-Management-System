@@ -100,8 +100,59 @@ public class MemberDetailPanel {
         Trainer trainer = member.hasTrainer() ? DataStore.getInstance().getTrainer(member.getTrainerId()) : null;
         Label trainerLabel = UIHelper.createLabel("Trainer: " + (trainer != null ? trainer.getName() : "None"));
 
+        Region spacer = new Region();
+        VBox.setVgrow(spacer, Priority.ALWAYS);
+
+        Button removeMemberBtn = new Button("Remove Member");
+        removeMemberBtn.setMaxWidth(Double.MAX_VALUE);
+        removeMemberBtn.setMinHeight(44);
+        removeMemberBtn.setStyle(
+            "-fx-background-color: #E63946;" +
+            "-fx-text-fill: white;" +
+            "-fx-font-size: 14px;" +
+            "-fx-font-weight: 900;" +
+            "-fx-font-family: " + UIHelper.FONT + ";" +
+            "-fx-background-radius: 12;" +
+            "-fx-cursor: hand;" +
+            "-fx-padding: 10 20;"
+        );
+        removeMemberBtn.setOnMouseEntered(e -> removeMemberBtn.setStyle(
+            "-fx-background-color: #FF4D5B;" +
+            "-fx-text-fill: white;" +
+            "-fx-font-size: 14px;" +
+            "-fx-font-weight: 900;" +
+            "-fx-font-family: " + UIHelper.FONT + ";" +
+            "-fx-background-radius: 12;" +
+            "-fx-cursor: hand;" +
+            "-fx-padding: 10 20;" +
+            "-fx-effect: dropshadow(gaussian, rgba(230,57,70,0.4), 14, 0.3, 0, 4);"
+        ));
+        removeMemberBtn.setOnMouseExited(e -> removeMemberBtn.setStyle(
+            "-fx-background-color: #E63946;" +
+            "-fx-text-fill: white;" +
+            "-fx-font-size: 14px;" +
+            "-fx-font-weight: 900;" +
+            "-fx-font-family: " + UIHelper.FONT + ";" +
+            "-fx-background-radius: 12;" +
+            "-fx-cursor: hand;" +
+            "-fx-padding: 10 20;"
+        ));
+        removeMemberBtn.setOnAction(e -> {
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+            confirm.setTitle("Remove Member");
+            confirm.setHeaderText(null);
+            confirm.setContentText("Are you sure you want to remove " + member.getName() + "?");
+            confirm.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
+                    DataStore.getInstance().removeMember(member.getMemberId());
+                    DataStore.getInstance().saveAll();
+                    onNavigate.accept("members");
+                }
+            });
+        });
+
         leftPanel.getChildren().addAll(avatar, nameLabel, idLabel, planLabel,
-                new Region() {{ setPrefHeight(8); }}, quickStats, trainerLabel);
+                new Region() {{ setPrefHeight(8); }}, quickStats, trainerLabel, spacer, removeMemberBtn);
         return leftPanel;
     }
 
