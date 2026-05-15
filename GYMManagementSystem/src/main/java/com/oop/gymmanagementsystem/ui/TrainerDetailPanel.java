@@ -1,13 +1,22 @@
 package com.oop.gymmanagementsystem.ui;
 
 import com.oop.gymmanagementsystem.exceptions.TrainerLimitExceededException;
-import com.oop.gymmanagementsystem.models.*;
+import com.oop.gymmanagementsystem.models.Member;
+import com.oop.gymmanagementsystem.models.Trainer;
 import com.oop.gymmanagementsystem.services.TrainerService;
 import com.oop.gymmanagementsystem.storage.DataStore;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceDialog;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -19,6 +28,7 @@ public class TrainerDetailPanel {
     private final Consumer<String> onNavigate;
     private BorderPane root;
     private VBox memberListBox;
+    private Label sectionTitle;
 
     public TrainerDetailPanel(Trainer trainer, TrainerService trainerService, Consumer<String> onNavigate) {
         this.trainer = trainer;
@@ -31,72 +41,55 @@ public class TrainerDetailPanel {
         root = new BorderPane();
         root.setStyle("-fx-background-color: " + UIHelper.BG_DARK + ";");
 
-        // Top bar
-        HBox topBar = new HBox(12);
-        topBar.setPadding(new Insets(16, 24, 16, 24));
-        topBar.setAlignment(Pos.CENTER_LEFT);
-        topBar.setStyle("-fx-background-color: " + UIHelper.BG_SIDEBAR + ";");
-        Button backBtn = UIHelper.createPrimaryButton("← Trainers");
+        Button backBtn = UIHelper.createSecondaryButton("Back to Trainers");
         backBtn.setOnAction(e -> onNavigate.accept("trainers"));
-        Label title = new Label("Trainer: " + trainer.getName());
-        title.setStyle("-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;");
-        topBar.getChildren().addAll(backBtn, title);
-        root.setTop(topBar);
+        root.setTop(UIHelper.createTopBar("Trainer: " + trainer.getName(), backBtn));
 
-        // Left panel - Trainer info
         VBox leftPanel = new VBox(16);
         leftPanel.setPadding(new Insets(24));
-        leftPanel.setPrefWidth(260);
+        leftPanel.setPrefWidth(280);
         leftPanel.setAlignment(Pos.TOP_CENTER);
-        leftPanel.setStyle("-fx-background-color: " + UIHelper.BG_SIDEBAR + ";");
+        leftPanel.setStyle("-fx-background-color: " + UIHelper.BG_SIDEBAR
+                + "; -fx-border-color: transparent " + UIHelper.BORDER + " transparent transparent;");
 
         Label avatar = new Label(trainer.getName().substring(0, 1).toUpperCase());
-        avatar.setMinSize(80, 80); avatar.setMaxSize(80, 80);
+        avatar.setMinSize(82, 82);
+        avatar.setMaxSize(82, 82);
         avatar.setAlignment(Pos.CENTER);
-        avatar.setStyle(
-            "-fx-background-color: #1565C0; -fx-background-radius: 40;" +
-            "-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: bold;"
-        );
+        avatar.setStyle("-fx-background-color: " + UIHelper.ACCENT + "; -fx-background-radius: 41;"
+                + "-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;");
 
-        Label nameLabel = new Label(trainer.getName());
-        nameLabel.setStyle("-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;");
+        Label nameLabel = UIHelper.createSectionLabel(trainer.getName());
         Label idLabel = UIHelper.createLabel(trainer.getTrainerId());
 
-        VBox infoBox = new VBox(6);
-        infoBox.setPadding(new Insets(12));
-        infoBox.setStyle("-fx-background-color: " + UIHelper.BG_CARD + "; -fx-background-radius: 10;");
+        VBox infoBox = new VBox(8);
+        infoBox.setPadding(new Insets(14));
+        infoBox.setStyle(UIHelper.cardStyle());
         infoBox.getChildren().addAll(
-            createRow("Specialization", trainer.getSpecialization()),
-            createRow("Experience", trainer.getExperienceYears() + " years"),
-            createRow("Phone", trainer.getPhone()),
-            createRow("Email", trainer.getEmail()),
-            createRow("Base Salary", "Rs. " + (int) trainer.getBaseSalary()),
-            createRow("Total Salary", "Rs. " + (int) trainerService.calculateSalary(trainer.getTrainerId())),
-            createRow("Members", trainer.getAssignedMemberIds().size() + "/" + Trainer.MAX_MEMBERS)
+                UIHelper.createMetricRow("Specialization", trainer.getSpecialization()),
+                UIHelper.createMetricRow("Experience", trainer.getExperienceYears() + " years"),
+                UIHelper.createMetricRow("Phone", trainer.getPhone()),
+                UIHelper.createMetricRow("Email", trainer.getEmail()),
+                UIHelper.createMetricRow("Base Salary", "Rs. " + (int) trainer.getBaseSalary()),
+                UIHelper.createMetricRow("Total Salary", "Rs. " + (int) trainerService.calculateSalary(trainer.getTrainerId())),
+                UIHelper.createMetricRow("Members", trainer.getAssignedMemberIds().size() + "/" + Trainer.MAX_MEMBERS)
         );
 
         leftPanel.getChildren().addAll(avatar, nameLabel, idLabel, infoBox);
         root.setLeft(leftPanel);
 
-        // Right panel - Assigned members
-        VBox rightPanel = new VBox(12);
-        rightPanel.setPadding(new Insets(20));
+        VBox rightPanel = new VBox(14);
+        rightPanel.setPadding(new Insets(22));
+        sectionTitle = UIHelper.createSectionLabel(assignedTitle());
 
-        Label secTitle = new Label("ASSIGNED MEMBERS (" +
-                trainer.getAssignedMemberIds().size() + "/" + Trainer.MAX_MEMBERS + ")");
-        secTitle.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;");
-
-        HBox actions = new HBox(12);
         Button addMemberBtn = UIHelper.createPrimaryButton("+ Assign Member");
         addMemberBtn.setDisable(!trainer.canAcceptMember());
         addMemberBtn.setOnAction(e -> showAssignMemberDialog());
 
-        actions.getChildren().add(addMemberBtn);
-
-        memberListBox = new VBox(8);
+        memberListBox = new VBox(10);
         refreshMemberList();
 
-        rightPanel.getChildren().addAll(secTitle, actions, memberListBox);
+        rightPanel.getChildren().addAll(sectionTitle, addMemberBtn, memberListBox);
         ScrollPane sp = new ScrollPane(rightPanel);
         UIHelper.applyDarkScrollPane(sp);
         root.setCenter(sp);
@@ -104,6 +97,7 @@ public class TrainerDetailPanel {
 
     private void refreshMemberList() {
         memberListBox.getChildren().clear();
+        sectionTitle.setText(assignedTitle());
         DataStore ds = DataStore.getInstance();
 
         if (trainer.getAssignedMemberIds().isEmpty()) {
@@ -113,65 +107,62 @@ public class TrainerDetailPanel {
 
         for (String memberId : trainer.getAssignedMemberIds()) {
             Member member = ds.getMember(memberId);
-            if (member == null) continue;
+            if (member == null) {
+                continue;
+            }
+            memberListBox.getChildren().add(createMemberRow(memberId, member));
+        }
+    }
 
-            HBox card = new HBox(12);
-            card.setPadding(new Insets(12));
-            card.setAlignment(Pos.CENTER_LEFT);
-            card.setStyle("-fx-background-color: " + UIHelper.BG_CARD + "; -fx-background-radius: 8;");
+    private HBox createMemberRow(String memberId, Member member) {
+        HBox card = new HBox(12);
+        card.setPadding(new Insets(14));
+        card.setAlignment(Pos.CENTER_LEFT);
+        card.setStyle("-fx-background-color: " + UIHelper.BG_CARD + "; -fx-background-radius: 14;"
+                + "-fx-border-color: " + UIHelper.BORDER + "; -fx-border-radius: 14;");
 
-            Label mAvatar = new Label(member.getName().substring(0, 1));
-            mAvatar.setMinSize(36, 36); mAvatar.setMaxSize(36, 36);
-            mAvatar.setAlignment(Pos.CENTER);
-            mAvatar.setStyle(
-                "-fx-background-color: " + UIHelper.PRIMARY + "; -fx-background-radius: 18;" +
-                "-fx-text-fill: white; -fx-font-weight: bold;"
-            );
+        Label avatar = new Label(member.getName().substring(0, 1).toUpperCase());
+        avatar.setMinSize(38, 38);
+        avatar.setMaxSize(38, 38);
+        avatar.setAlignment(Pos.CENTER);
+        avatar.setStyle("-fx-background-color: " + UIHelper.PRIMARY + "; -fx-background-radius: 19;"
+                + "-fx-text-fill: white; -fx-font-weight: 900;");
 
-            VBox mInfo = new VBox(2);
-            mInfo.getChildren().addAll(
+        VBox info = new VBox(3);
+        info.getChildren().addAll(
                 UIHelper.createValueLabel(member.getName()),
                 UIHelper.createLabel(member.getPlan().getDisplayName() + " | " + member.getFitnessGoal())
-            );
-            HBox.setHgrow(mInfo, Priority.ALWAYS);
+        );
+        HBox.setHgrow(info, Priority.ALWAYS);
 
-            Button removeBtn = new Button("Remove");
-            removeBtn.setStyle(
-                "-fx-background-color: " + UIHelper.DANGER + ";" +
-                "-fx-text-fill: white; -fx-font-size: 11px; -fx-background-radius: 6; -fx-cursor: hand;"
-            );
-            removeBtn.setOnAction(e -> {
-                trainerService.removeMemberFromTrainer(trainer.getTrainerId(), memberId);
-                refreshMemberList();
-            });
+        Button removeBtn = UIHelper.createSecondaryButton("Remove");
+        removeBtn.setOnAction(e -> {
+            trainerService.removeMemberFromTrainer(trainer.getTrainerId(), memberId);
+            refreshMemberList();
+        });
 
-            card.getChildren().addAll(mAvatar, mInfo, removeBtn);
-            memberListBox.getChildren().add(card);
-        }
+        card.getChildren().addAll(avatar, info, removeBtn);
+        return card;
     }
 
     private void showAssignMemberDialog() {
         DataStore ds = DataStore.getInstance();
-        // Get unassigned members
         List<Member> unassigned = ds.getAllMembers().stream()
                 .filter(m -> !m.hasTrainer())
                 .collect(Collectors.toList());
 
         if (unassigned.isEmpty()) {
-            UIHelper.showAlert("Info", "No unassigned members available.", Alert.AlertType.INFORMATION);
+            UIHelper.showAlert("No Members", "No unassigned members are available.", Alert.AlertType.INFORMATION);
             return;
         }
 
         ChoiceDialog<String> dialog = new ChoiceDialog<>();
         dialog.setTitle("Assign Member");
         dialog.setHeaderText("Select a member to assign to " + trainer.getName());
-
         for (Member m : unassigned) {
             dialog.getItems().add(m.getMemberId() + " - " + m.getName());
         }
-        if (!dialog.getItems().isEmpty()) {
-            dialog.setSelectedItem(dialog.getItems().get(0));
-        }
+        dialog.setSelectedItem(dialog.getItems().get(0));
 
         dialog.showAndWait().ifPresent(selection -> {
             String memberId = selection.split(" - ")[0];
@@ -179,20 +170,16 @@ public class TrainerDetailPanel {
                 trainerService.assignMemberToTrainer(trainer.getTrainerId(), memberId);
                 refreshMemberList();
             } catch (TrainerLimitExceededException ex) {
-                UIHelper.showAlert("Error", ex.getMessage(), Alert.AlertType.ERROR);
+                UIHelper.showAlert("Trainer Full", ex.getMessage(), Alert.AlertType.ERROR);
             }
         });
     }
 
-    private HBox createRow(String label, String value) {
-        HBox row = new HBox();
-        Label lbl = UIHelper.createLabel(label + ": ");
-        Region spacer = new Region();
-        HBox.setHgrow(spacer, Priority.ALWAYS);
-        Label val = UIHelper.createValueLabel(value);
-        row.getChildren().addAll(lbl, spacer, val);
-        return row;
+    private String assignedTitle() {
+        return "Assigned Members (" + trainer.getAssignedMemberIds().size() + "/" + Trainer.MAX_MEMBERS + ")";
     }
 
-    public BorderPane getRoot() { return root; }
+    public BorderPane getRoot() {
+        return root;
+    }
 }

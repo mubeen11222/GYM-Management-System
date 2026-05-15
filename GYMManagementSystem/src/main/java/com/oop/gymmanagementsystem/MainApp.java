@@ -48,7 +48,6 @@ public class MainApp extends Application {
         rootContainer.setStyle("-fx-background-color: " + UIHelper.BG_DARK + ";");
 
         scene = new Scene(rootContainer, 1100, 700);
-        scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
 
         // Apply dark theme to dialogs
         scene.getRoot().setStyle("-fx-background-color: " + UIHelper.BG_DARK + ";");
