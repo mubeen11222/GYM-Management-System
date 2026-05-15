@@ -1,7 +1,7 @@
 .root {
     -fx-font-family: "MiddleWeather SemiBold", "MiddleWeather", "Segoe UI Semibold", "Segoe UI", Arial;
     -fx-font-weight: 600;
-    -fx-background-color: #111318;
+    -fx-background-color: #0A0A0A;
 }
 
 .label {
@@ -22,9 +22,9 @@
 
 .combo-box,
 .choice-box {
-    -fx-background-color: #232833;
+    -fx-background-color: #1A1A1A;
     -fx-background-radius: 10;
-    -fx-border-color: #2E3440;
+    -fx-border-color: #2A1015;
     -fx-border-radius: 10;
     -fx-mark-color: #F8FAFC;
 }
@@ -36,18 +36,18 @@
 }
 
 .combo-box-popup .list-view {
-    -fx-background-color: #1B1F27;
-    -fx-border-color: #2E3440;
+    -fx-background-color: #141414;
+    -fx-border-color: #2A1015;
 }
 
 .combo-box-popup .list-cell {
-    -fx-background-color: #1B1F27;
+    -fx-background-color: #141414;
     -fx-text-fill: #F8FAFC;
     -fx-padding: 8 12;
 }
 
 .combo-box-popup .list-cell:hover {
-    -fx-background-color: #2B313D;
+    -fx-background-color: #1A1A1A;
 }
 
 .tab-pane {
@@ -55,8 +55,8 @@
 }
 
 .tab-pane .tab-header-area .tab-header-background {
-    -fx-background-color: #171A21;
-    -fx-border-color: transparent transparent #2E3440 transparent;
+    -fx-background-color: #0E0E0E;
+    -fx-border-color: transparent transparent #2A1015 transparent;
 }
 
 .tab {
@@ -65,12 +65,12 @@
 }
 
 .tab:selected {
-    -fx-background-color: #232833;
+    -fx-background-color: #1A1A1A;
     -fx-background-radius: 10 10 0 0;
 }
 
 .tab .tab-label {
-    -fx-text-fill: #A8B0BF;
+    -fx-text-fill: #9A9A9A;
     -fx-font-weight: 800;
 }
 
@@ -80,21 +80,21 @@
 
 .scroll-pane,
 .scroll-pane > .viewport {
-    -fx-background-color: #111318;
+    -fx-background-color: #0A0A0A;
 }
 
 .scroll-bar:vertical,
 .scroll-bar:horizontal {
-    -fx-background-color: #111318;
+    -fx-background-color: #0A0A0A;
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: #343C4C;
+    -fx-background-color: #2A1015;
     -fx-background-radius: 999;
 }
 
 .progress-bar > .track {
-    -fx-background-color: #232833;
+    -fx-background-color: #1A1A1A;
     -fx-background-radius: 999;
 }
 
@@ -108,18 +108,18 @@
 }
 
 .check-box .box {
-    -fx-background-color: #232833;
-    -fx-border-color: #3C4658;
+    -fx-background-color: #1A1A1A;
+    -fx-border-color: #2A1015;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
 }
 
 .check-box:selected .box {
-    -fx-background-color: #2DD4BF;
+    -fx-background-color: #E63946;
 }
 
 .dialog-pane {
-    -fx-background-color: #1B1F27;
+    -fx-background-color: #141414;
 }
 
 .dialog-pane .label {

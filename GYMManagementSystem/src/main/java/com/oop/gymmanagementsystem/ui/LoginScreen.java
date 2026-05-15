@@ -5,7 +5,10 @@ import com.oop.gymmanagementsystem.services.AuthService;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.shape.Circle;
 
 public class LoginScreen {
     private final AuthService authService;
@@ -23,7 +26,7 @@ public class LoginScreen {
         root.setAlignment(Pos.CENTER);
         root.setPadding(new Insets(32));
         root.setStyle(
-            "-fx-background-color: linear-gradient(to bottom right, #111318, #161A23 52%, #20171C);"
+            "-fx-background-color: linear-gradient(to bottom right, #0A0A0A, #0E0E0E 52%, #150A0C);"
         );
 
         HBox shell = new HBox(0);
@@ -31,9 +34,9 @@ public class LoginScreen {
         shell.setMinHeight(520);
         shell.setEffect(UIHelper.softShadow());
         shell.setStyle(
-            "-fx-background-color: " + UIHelper.BG_CARD + ";" +
+            "-fx-background-color: #111111;" +
             "-fx-background-radius: 24;" +
-            "-fx-border-color: " + UIHelper.BORDER + ";" +
+            "-fx-border-color: #2A1015;" +
             "-fx-border-radius: 24;"
         );
 
@@ -42,20 +45,23 @@ public class LoginScreen {
         brandPanel.setPrefWidth(450);
         brandPanel.setAlignment(Pos.CENTER_LEFT);
         brandPanel.setStyle(
-            "-fx-background-color: linear-gradient(to bottom right, #E63946, #7A1F2B);" +
+            "-fx-background-color: linear-gradient(to bottom right, #CC2936, #5A0F18);" +
             "-fx-background-radius: 24 0 0 24;"
         );
 
-        Label badge = new Label("AI");
-        badge.setAlignment(Pos.CENTER);
-        badge.setMinSize(58, 58);
-        badge.setStyle(
-            "-fx-background-color: rgba(255,255,255,0.16);" +
-            "-fx-background-radius: 18;" +
-            "-fx-text-fill: white;" +
-            "-fx-font-size: 24px;" +
-            "-fx-font-weight: 900;"
-        );
+        ImageView logoBadge = new ImageView();
+        try {
+            Image logoImg = new Image(getClass().getResourceAsStream("/mms_gym_logo.png"));
+            logoBadge.setImage(logoImg);
+            logoBadge.setFitWidth(180);
+            logoBadge.setFitHeight(180);
+            logoBadge.setPreserveRatio(true);
+            logoBadge.setSmooth(true);
+            Circle logoClip = new Circle(90, 90, 90);
+            logoBadge.setClip(logoClip);
+        } catch (Exception ex) {
+            System.err.println("Could not load logo: " + ex.getMessage());
+        }
 
         Label heroTitle = new Label("Gym operations,\nmanaged beautifully.");
         heroTitle.setStyle("-fx-text-fill: white; -fx-font-size: 34px; -fx-font-weight: 900;");
@@ -66,14 +72,15 @@ public class LoginScreen {
 
         HBox featureRow = new HBox(10);
         featureRow.getChildren().addAll(createFeatureChip("File saved"), createFeatureChip("JavaFX GUI"), createFeatureChip("OOP ready"));
-        brandPanel.getChildren().addAll(badge, heroTitle, heroCopy, featureRow);
+        brandPanel.getChildren().addAll(logoBadge, heroTitle, heroCopy, featureRow);
 
         VBox loginCard = new VBox(20);
         loginCard.setAlignment(Pos.CENTER_LEFT);
         loginCard.setPadding(new Insets(42));
         HBox.setHgrow(loginCard, Priority.ALWAYS);
 
-        Label title = UIHelper.createTitle("AI GYM");
+        Label title = UIHelper.createTitle("MMS GYM");
+        title.setStyle("-fx-text-fill: #E63946; -fx-font-family: 'Anton', 'Impact', sans-serif; -fx-font-size: 32px; -fx-font-weight: 900; -fx-letter-spacing: -1;");
         Label subtitle = UIHelper.createSubtitle("Sign in to your management dashboard");
 
         TextField usernameField = UIHelper.createTextField("Username");
