@@ -26,7 +26,7 @@ public class LoginScreen {
         root.setAlignment(Pos.CENTER);
         root.setPadding(new Insets(32));
         root.setStyle(
-            "-fx-background-color: linear-gradient(to bottom right, #0A0A0A, #0E0E0E 52%, #150A0C);"
+            "-fx-background-color: linear-gradient(to bottom right, #0A0A0A, #0E0E0E 52%, #160B05);"
         );
 
         HBox shell = new HBox(0);
@@ -36,7 +36,7 @@ public class LoginScreen {
         shell.setStyle(
             "-fx-background-color: #111111;" +
             "-fx-background-radius: 24;" +
-            "-fx-border-color: #2A1015;" +
+            "-fx-border-color: #2A160A;" +
             "-fx-border-radius: 24;"
         );
 
@@ -45,20 +45,18 @@ public class LoginScreen {
         brandPanel.setPrefWidth(450);
         brandPanel.setAlignment(Pos.CENTER_LEFT);
         brandPanel.setStyle(
-            "-fx-background-color: linear-gradient(to bottom right, #CC2936, #5A0F18);" +
+            "-fx-background-color: linear-gradient(to bottom right, #FF6A00, #803300);" +
             "-fx-background-radius: 24 0 0 24;"
         );
 
         ImageView logoBadge = new ImageView();
         try {
-            Image logoImg = new Image(getClass().getResourceAsStream("/mms_gym_logo.png"));
+            Image logoImg = new Image(getClass().getResourceAsStream("/iron_forge_logo.png"));
             logoBadge.setImage(logoImg);
             logoBadge.setFitWidth(180);
             logoBadge.setFitHeight(180);
             logoBadge.setPreserveRatio(true);
             logoBadge.setSmooth(true);
-            Circle logoClip = new Circle(90, 90, 90);
-            logoBadge.setClip(logoClip);
         } catch (Exception ex) {
             System.err.println("Could not load logo: " + ex.getMessage());
         }
@@ -79,8 +77,8 @@ public class LoginScreen {
         loginCard.setPadding(new Insets(42));
         HBox.setHgrow(loginCard, Priority.ALWAYS);
 
-        Label title = UIHelper.createTitle("MMS GYM");
-        title.setStyle("-fx-text-fill: #E63946; -fx-font-family: 'Anton', 'Impact', sans-serif; -fx-font-size: 32px; -fx-font-weight: 900; -fx-letter-spacing: -1;");
+        Label title = UIHelper.createTitle("IRON FORGE");
+        title.setStyle("-fx-text-fill: " + UIHelper.PRIMARY + "; -fx-font-family: 'Anton', 'Impact', sans-serif; -fx-font-size: 32px; -fx-font-weight: 900; -fx-letter-spacing: -1;");
         Label subtitle = UIHelper.createSubtitle("Sign in to your management dashboard");
 
         TextField usernameField = UIHelper.createTextField("Username");

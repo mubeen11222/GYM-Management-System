@@ -107,7 +107,7 @@ public class MemberDetailPanel {
         removeMemberBtn.setMaxWidth(Double.MAX_VALUE);
         removeMemberBtn.setMinHeight(44);
         removeMemberBtn.setStyle(
-            "-fx-background-color: #E63946;" +
+            "-fx-background-color: " + UIHelper.PRIMARY + ";" +
             "-fx-text-fill: white;" +
             "-fx-font-size: 14px;" +
             "-fx-font-weight: 900;" +
@@ -117,7 +117,7 @@ public class MemberDetailPanel {
             "-fx-padding: 10 20;"
         );
         removeMemberBtn.setOnMouseEntered(e -> removeMemberBtn.setStyle(
-            "-fx-background-color: #FF4D5B;" +
+            "-fx-background-color: " + UIHelper.PRIMARY_HOVER + ";" +
             "-fx-text-fill: white;" +
             "-fx-font-size: 14px;" +
             "-fx-font-weight: 900;" +
@@ -125,10 +125,10 @@ public class MemberDetailPanel {
             "-fx-background-radius: 12;" +
             "-fx-cursor: hand;" +
             "-fx-padding: 10 20;" +
-            "-fx-effect: dropshadow(gaussian, rgba(230,57,70,0.4), 14, 0.3, 0, 4);"
+            "-fx-effect: dropshadow(gaussian, rgba(255,106,0,0.4), 14, 0.3, 0, 4);"
         ));
         removeMemberBtn.setOnMouseExited(e -> removeMemberBtn.setStyle(
-            "-fx-background-color: #E63946;" +
+            "-fx-background-color: " + UIHelper.PRIMARY + ";" +
             "-fx-text-fill: white;" +
             "-fx-font-size: 14px;" +
             "-fx-font-weight: 900;" +

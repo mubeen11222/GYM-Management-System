@@ -83,7 +83,7 @@ public class TrainerDetailPanel {
         removeTrainerBtn.setMaxWidth(Double.MAX_VALUE);
         removeTrainerBtn.setMinHeight(44);
         removeTrainerBtn.setStyle(
-            "-fx-background-color: #E63946;" +
+            "-fx-background-color: " + UIHelper.PRIMARY + ";" +
             "-fx-text-fill: white;" +
             "-fx-font-size: 14px;" +
             "-fx-font-weight: 900;" +
@@ -93,7 +93,7 @@ public class TrainerDetailPanel {
             "-fx-padding: 10 20;"
         );
         removeTrainerBtn.setOnMouseEntered(e -> removeTrainerBtn.setStyle(
-            "-fx-background-color: #FF4D5B;" +
+            "-fx-background-color: " + UIHelper.PRIMARY_HOVER + ";" +
             "-fx-text-fill: white;" +
             "-fx-font-size: 14px;" +
             "-fx-font-weight: 900;" +
@@ -101,10 +101,10 @@ public class TrainerDetailPanel {
             "-fx-background-radius: 12;" +
             "-fx-cursor: hand;" +
             "-fx-padding: 10 20;" +
-            "-fx-effect: dropshadow(gaussian, rgba(230,57,70,0.4), 14, 0.3, 0, 4);"
+            "-fx-effect: dropshadow(gaussian, rgba(255,106,0,0.4), 14, 0.3, 0, 4);"
         ));
         removeTrainerBtn.setOnMouseExited(e -> removeTrainerBtn.setStyle(
-            "-fx-background-color: #E63946;" +
+            "-fx-background-color: " + UIHelper.PRIMARY + ";" +
             "-fx-text-fill: white;" +
             "-fx-font-size: 14px;" +
             "-fx-font-weight: 900;" +
