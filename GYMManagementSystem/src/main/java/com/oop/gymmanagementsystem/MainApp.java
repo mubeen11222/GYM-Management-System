@@ -72,7 +72,7 @@ public class MainApp extends Application {
         // Start with login screen
         showLogin();
 
-        primaryStage.setTitle("MMS GYM Management System");
+        primaryStage.setTitle("IRON FORGE GYM Management System");
         primaryStage.setScene(scene);
         primaryStage.setMinWidth(1040);
         primaryStage.setMinHeight(680);
@@ -175,7 +175,7 @@ public class MainApp extends Application {
         sidebar.setPadding(new Insets(26, 20, 22, 20));
         sidebar.setStyle(
                 "-fx-background-color: linear-gradient(to bottom, #0E0E0E, #080808);" +
-                "-fx-border-color: transparent #1A0A0D transparent transparent;"
+                "-fx-border-color: transparent #1A110A transparent transparent;"
         );
 
         HBox brand = new HBox(10);
@@ -183,24 +183,22 @@ public class MainApp extends Application {
 
         ImageView logoView = new ImageView();
         try {
-            Image logoImg = new Image(getClass().getResourceAsStream("/mms_gym_logo.png"));
+            Image logoImg = new Image(getClass().getResourceAsStream("/iron_forge_logo.png"));
             logoView.setImage(logoImg);
             logoView.setFitWidth(130);
             logoView.setFitHeight(130);
             logoView.setPreserveRatio(true);
             logoView.setSmooth(true);
-            Circle clip = new Circle(65, 65, 65);
-            logoView.setClip(clip);
         } catch (Exception ex) {
             System.err.println("Could not load logo: " + ex.getMessage());
         }
 
         VBox brandText = new VBox(0);
-        Label name = new Label("MMS GYM");
+        Label name = new Label("IRON FORGE");
         name.setMinWidth(Region.USE_PREF_SIZE);
-        name.setStyle("-fx-text-fill: #E63946; -fx-font-size: 26px; -fx-font-family: 'Anton', 'Impact', sans-serif; -fx-font-weight: 900; -fx-letter-spacing: -1;");
+        name.setStyle("-fx-text-fill: " + UIHelper.PRIMARY + "; -fx-font-size: 26px; -fx-font-family: 'Anton', 'Impact', sans-serif; -fx-font-weight: 900; -fx-letter-spacing: -1;");
         Label sub = new Label("Management Suite");
-        sub.setStyle("-fx-text-fill: #E63946; -fx-font-size: 11px; -fx-font-family: " + UIHelper.FONT + "; -fx-font-weight: 600;");
+        sub.setStyle("-fx-text-fill: " + UIHelper.PRIMARY + "; -fx-font-size: 11px; -fx-font-family: " + UIHelper.FONT + "; -fx-font-weight: 600;");
         brandText.getChildren().addAll(name, sub);
         brand.getChildren().addAll(logoView, brandText);
 
@@ -261,8 +259,8 @@ public class MainApp extends Application {
     }
 
     private String navStyle(boolean active, boolean hover) {
-        String bg = active ? "linear-gradient(to right, #E63946, #8B1A25)" : (hover ? "#1A1A1A" : "transparent");
-        String border = active ? "rgba(230,57,70,0.3)" : (hover ? "#2A1015" : "transparent");
+        String bg = active ? "linear-gradient(to right, #FF6A00, #B33600)" : (hover ? "#1A1A1A" : "transparent");
+        String border = active ? "rgba(255,106,0,0.3)" : (hover ? "#2A160A" : "transparent");
         return "-fx-background-color: " + bg + ";"
                 + "-fx-background-radius: 14;"
                 + "-fx-border-color: " + border + ";"
@@ -284,9 +282,9 @@ public class MainApp extends Application {
     private String shellPanelStyle(String color) {
         return "-fx-background-color: " + color + ";"
                 + "-fx-background-radius: 20;"
-                + "-fx-border-color: #2A1015;"
+                + "-fx-border-color: #2A160A;"
                 + "-fx-border-radius: 20;"
-                + "-fx-effect: dropshadow(gaussian, rgba(230,57,70,0.08), 28, 0.20, 0, 10);";
+                + "-fx-effect: dropshadow(gaussian, rgba(255,106,0,0.08), 28, 0.20, 0, 10);";
     }
 
     public static void main(String[] args) {

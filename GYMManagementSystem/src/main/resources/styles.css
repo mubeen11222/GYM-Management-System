@@ -24,7 +24,7 @@
 .choice-box {
     -fx-background-color: #1A1A1A;
     -fx-background-radius: 10;
-    -fx-border-color: #2A1015;
+    -fx-border-color: #2A160A;
     -fx-border-radius: 10;
     -fx-mark-color: #F8FAFC;
 }
@@ -37,7 +37,7 @@
 
 .combo-box-popup .list-view {
     -fx-background-color: #141414;
-    -fx-border-color: #2A1015;
+    -fx-border-color: #2A160A;
 }
 
 .combo-box-popup .list-cell {
@@ -56,7 +56,7 @@
 
 .tab-pane .tab-header-area .tab-header-background {
     -fx-background-color: #0E0E0E;
-    -fx-border-color: transparent transparent #2A1015 transparent;
+    -fx-border-color: transparent transparent #2A160A transparent;
 }
 
 .tab {
@@ -89,7 +89,7 @@
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: #2A1015;
+    -fx-background-color: #2A160A;
     -fx-background-radius: 999;
 }
 
@@ -99,7 +99,7 @@
 }
 
 .progress-bar > .bar {
-    -fx-background-color: #E63946;
+    -fx-background-color: #FF6A00;
     -fx-background-radius: 999;
 }
 
@@ -109,13 +109,13 @@
 
 .check-box .box {
     -fx-background-color: #1A1A1A;
-    -fx-border-color: #2A1015;
+    -fx-border-color: #2A160A;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
 }
 
 .check-box:selected .box {
-    -fx-background-color: #E63946;
+    -fx-background-color: #FF6A00;
 }
 
 .dialog-pane {

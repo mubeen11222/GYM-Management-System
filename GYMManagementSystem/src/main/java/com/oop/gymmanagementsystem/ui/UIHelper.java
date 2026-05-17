@@ -22,12 +22,12 @@ public class UIHelper {
     public static final String BG_CARD = "#141414";
     public static final String BG_SIDEBAR = "#0E0E0E";
     public static final String BG_INPUT = "#1A1A1A";
-    public static final String PRIMARY = "#E63946";
-    public static final String PRIMARY_HOVER = "#FF4D5B";
-    public static final String ACCENT = "#CC2936";
+    public static final String PRIMARY = "#FF6A00";
+    public static final String PRIMARY_HOVER = "#FF8533";
+    public static final String ACCENT = "#E65F00";
     public static final String TEXT_PRIMARY = "#F8FAFC";
     public static final String TEXT_SECONDARY = "#9A9A9A";
-    public static final String BORDER = "#2A1015";
+    public static final String BORDER = "#2A160A";
     public static final String SUCCESS = "#2DD4BF";
     public static final String WARNING = "#F59E0B";
     public static final String DANGER = "#FB7185";
@@ -39,7 +39,7 @@ public class UIHelper {
         btn.setMinHeight(40);
         btn.setStyle(primaryButtonStyle(PRIMARY, true));
         btn.setOnMouseEntered(e -> btn.setStyle(primaryButtonStyle(PRIMARY_HOVER, true)
-                + "-fx-effect: dropshadow(gaussian, rgba(230,57,70,0.35), 18, 0.35, 0, 6);"));
+                + "-fx-effect: dropshadow(gaussian, rgba(255,106,0,0.35), 18, 0.35, 0, 6);"));
         btn.setOnMouseExited(e -> btn.setStyle(primaryButtonStyle(PRIMARY, true)));
         return btn;
     }
@@ -161,7 +161,7 @@ public class UIHelper {
         iconLabel.setAlignment(Pos.CENTER);
         iconLabel.setMinSize(48, 48);
         iconLabel.setStyle(
-                "-fx-background-color: rgba(230,57,70,0.14);" +
+                "-fx-background-color: rgba(255,106,0,0.14);" +
                 "-fx-background-radius: 14;" +
                 "-fx-text-fill: " + PRIMARY + ";" +
                 "-fx-font-size: 24px;" +
@@ -248,7 +248,7 @@ public class UIHelper {
                 + "-fx-background-radius: 14;"
                 + "-fx-border-color: " + border + ";"
                 + "-fx-border-radius: 14;"
-                + "-fx-effect: dropshadow(gaussian, rgba(230,57,70,0.12), 22, 0.18, 0, 8);"
+                + "-fx-effect: dropshadow(gaussian, rgba(255,106,0,0.12), 22, 0.18, 0, 8);"
                 + "-fx-cursor: hand;";
     }
 

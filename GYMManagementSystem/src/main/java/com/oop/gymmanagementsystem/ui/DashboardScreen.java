@@ -175,13 +175,13 @@ public class DashboardScreen {
         covL.setStyle("-fx-text-fill: #777777; -fx-font-size: 11px;");
         Region sp = new Region(); HBox.setHgrow(sp, Priority.ALWAYS);
         Label covV = new Label(String.format("%.0f%% of salary", coverage * 100));
-        covV.setStyle("-fx-text-fill: #E63946; -fx-font-size: 11px;");
+        covV.setStyle("-fx-text-fill: " + UIHelper.PRIMARY + "; -fx-font-size: 11px;");
         covRow.getChildren().addAll(covL, sp, covV);
         
         ProgressBar pb = new ProgressBar(Math.min(coverage, 1.0));
         pb.setMaxWidth(Double.MAX_VALUE);
         pb.setPrefHeight(6);
-        pb.setStyle("-fx-accent: #E63946;");
+        pb.setStyle("-fx-accent: " + UIHelper.PRIMARY + ";");
         
         card.getChildren().addAll(t, v, s, spacer, covRow, pb);
         return card;
@@ -243,14 +243,14 @@ public class DashboardScreen {
         HBox badge = new HBox(8);
         badge.setAlignment(Pos.CENTER_LEFT);
         badge.setPadding(new Insets(10, 16, 10, 16));
-        badge.setStyle("-fx-background-color: #241515; -fx-background-radius: 14; -fx-border-color: #442020; -fx-border-radius: 14;");
+        badge.setStyle("-fx-background-color: #241B15; -fx-background-radius: 14; -fx-border-color: #442D20; -fx-border-radius: 14;");
         
-        Circle dot = new Circle(4, Color.web("#E63946"));
+        Circle dot = new Circle(4, Color.web(UIHelper.PRIMARY));
         VBox textV = new VBox(0);
         Label top = new Label("Needs attention");
-        top.setStyle("-fx-text-fill: #E63946; -fx-font-size: 12px; -fx-font-weight: 900;");
+        top.setStyle("-fx-text-fill: " + UIHelper.PRIMARY + "; -fx-font-size: 12px; -fx-font-weight: 900;");
         Label bot = new Label(text);
-        bot.setStyle("-fx-text-fill: #815252; -fx-font-size: 10px;");
+        bot.setStyle("-fx-text-fill: #816852; -fx-font-size: 10px;");
         textV.getChildren().addAll(top, bot);
         
         badge.getChildren().addAll(dot, textV);
